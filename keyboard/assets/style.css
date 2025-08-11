@@ -1,0 +1,186 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Navigation Styles */
+nav {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+nav a {
+    text-decoration: none;
+    color: #5a67d8;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(90, 103, 216, 0.1);
+    transform: translateY(-2px);
+}
+
+nav a[aria-current="page"] {
+    background-color: rgba(90, 103, 216, 0.2);
+    color: #434190;
+}
+
+/* Project Container */
+.project {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    margin-top: 60px; /* To account for fixed nav */
+}
+
+/* Keyboard Display Area */
+.insert {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.key {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #4a5568;
+    margin: 1rem;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border: 2px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.key::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(90, 103, 216, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.key:hover::before {
+    opacity: 1;
+}
+
+/* Animation for key press */
+.key.pressed {
+    animation: keyPress 0.3s ease;
+    background-color: #f0f4ff;
+    border-color: #5a67d8;
+    color: #434190;
+    transform: scale(0.98);
+}
+
+@keyframes keyPress {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(0.97);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    100% {
+        transform: scale(0.98);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .project {
+        padding: 1rem;
+        margin-top: 50px;
+    }
+    
+    .key {
+        font-size: 1.2rem;
+        padding: 1.5rem;
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem;
+    }
+    
+    nav a {
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .key {
+        font-size: 1rem;
+        padding: 1rem;
+        min-height: 120px;
+    }
+}
+
+/* Visual feedback for key events */
+.key-event-info {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.key-event-info.show {
+    opacity: 1;
+    transform: translateY(0);
+}
